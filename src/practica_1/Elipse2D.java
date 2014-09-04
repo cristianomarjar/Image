@@ -6,41 +6,33 @@
 
 package practica_1;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 
 /**
  *
  * @author CristianOmarJar
  */
-public class Image extends javax.swing.JFrame {
+public class Elipse2D extends javax.swing.JFrame {
 
     /**
-     * Creates new form Image
+     * Creates new form Elipse2D
      */
-    public Image() {
+    public Elipse2D() {
         initComponents();
     }
-
-    public void paint(Graphics g)
-{
-    super.paint(g);
-
-    BufferedImage img = null;
-    int posx=0, posy=0;
-    try
-    {
-        img = ImageIO.read(new File("src/recursos/logo_tec.jpg"));
-    }
-    catch (IOException e)
-    {
-        //Control de excepción si no se encuentra el archivo
-    }
-    g.drawImage(img, posx, posy, null);
+    public void paint (Graphics g) {
+super.paint(g);
+Graphics2D g2 = (Graphics2D)g;
+g2.setColor(Color.orange);
+g2.setStroke(new BasicStroke(3.0f));
+Ellipse2D e = new Ellipse2D.Float(100.0f,75.0f,50.0f,100.0f);
+g2.draw(e);
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,20 +76,20 @@ public class Image extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elipse2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elipse2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elipse2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Elipse2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Image().setVisible(true);
+                new Elipse2D().setVisible(true);
             }
         });
     }

@@ -7,40 +7,39 @@
 package practica_1;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  *
  * @author CristianOmarJar
  */
-public class Image extends javax.swing.JFrame {
+public class Rotartexto extends javax.swing.JFrame {
 
     /**
-     * Creates new form Image
+     * Creates new form Rotartexto
      */
-    public Image() {
+    public Rotartexto() {
         initComponents();
     }
-
-    public void paint(Graphics g)
-{
-    super.paint(g);
-
-    BufferedImage img = null;
-    int posx=0, posy=0;
-    try
-    {
-        img = ImageIO.read(new File("src/recursos/logo_tec.jpg"));
+        public void paint (Graphics g){
+        
+        super.paint(g);
+        
+        Graphics2D g2 = (Graphics2D)g;
+        int ancho = this.getSize().width;
+        int alto = this.getSize().height;
+        AffineTransform aT = g2.getTransform();
+        aT.translate(ancho/2, alto/2);
+        g2.transform(aT);
+        aT.setToRotation(Math.toRadians(45));
+        
+        for(int i=0;i<8;i++){
+            g2.drawString("2014 Es el año de Octavio Paz", 0.0f, 0.0f);
+            g2.transform(aT);
+        }
+        
     }
-    catch (IOException e)
-    {
-        //Control de excepción si no se encuentra el archivo
-    }
-    g.drawImage(img, posx, posy, null);
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,20 +83,20 @@ public class Image extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Rotartexto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Rotartexto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Rotartexto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Rotartexto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Image().setVisible(true);
+                new Rotartexto().setVisible(true);
             }
         });
     }

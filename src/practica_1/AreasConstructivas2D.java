@@ -6,41 +6,47 @@
 
 package practica_1;
 
+import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
  * @author CristianOmarJar
  */
-public class Image extends javax.swing.JFrame {
+public class AreasConstructivas2D extends javax.swing.JFrame {
 
     /**
-     * Creates new form Image
+     * Creates new form AreasConstructivas2D
      */
-    public Image() {
+    public AreasConstructivas2D() {
         initComponents();
     }
-
-    public void paint(Graphics g)
-{
-    super.paint(g);
-
-    BufferedImage img = null;
-    int posx=0, posy=0;
-    try
-    {
-        img = ImageIO.read(new File("src/recursos/logo_tec.jpg"));
-    }
-    catch (IOException e)
-    {
-        //Control de excepción si no se encuentra el archivo
-    }
-    g.drawImage(img, posx, posy, null);
+    public void paint (Graphics g) {
+Graphics2D g2 = (Graphics2D)g;
+// Dibujo del cielo. Este es el fondo.
+// Se ha usado un gradiente que va desde el azul al negro
+GradientPaint gp1 = new GradientPaint(10.0f, 125.0f, Color.blue,
+250.0f, 125.0f, Color.black);
+Rectangle2D r = new Rectangle2D.Double(0.0, 0.0, 250.0, 250.0);
+g2.setPaint(gp1);
+g2.fill(r);
+// Dibujo de la luna sobre el fondo
+GradientPaint gp2 = new GradientPaint (50.0f, 50.0f, Color.yellow,
+300.0f, 50.0f, Color.darkGray);
+g2.setPaint(gp2);
+Ellipse2D e1 = new Ellipse2D.Double(70.0, 100.0, 80.0, 80.0);
+Ellipse2D e2 = new Ellipse2D.Double(100.0, 100.0, 80.0, 80.0);
+Area a1 = new Area(e1);
+Area a2 = new Area(e2);
+a1.subtract(a2);
+g2.fill(a1);
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,20 +90,20 @@ public class Image extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AreasConstructivas2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AreasConstructivas2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AreasConstructivas2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AreasConstructivas2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Image().setVisible(true);
+                new AreasConstructivas2D().setVisible(true);
             }
         });
     }

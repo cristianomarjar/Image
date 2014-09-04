@@ -6,41 +6,46 @@
 
 package practica_1;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
  * @author CristianOmarJar
  */
-public class Image extends javax.swing.JFrame {
+public class InclinarFigura extends javax.swing.JFrame {
 
     /**
-     * Creates new form Image
+     * Creates new form InclinarFigura
      */
-    public Image() {
+    public InclinarFigura() {
         initComponents();
     }
-
-    public void paint(Graphics g)
-{
-    super.paint(g);
-
-    BufferedImage img = null;
-    int posx=0, posy=0;
-    try
-    {
-        img = ImageIO.read(new File("src/recursos/logo_tec.jpg"));
+       public void paint(Graphics g){
+        
+        super.paint(g); // para refrescar la pantalla al iniciar y asegurar aparescan las figuras
+        Graphics2D g2 =(Graphics2D)g;
+        
+        AffineTransform aT=g2.getTransform();
+        aT.translate(5, 50);
+        g2.transform(aT);
+        int x=50,y=50;
+        double a=0,b=0;
+        
+        for(int i=0;i<5;i++){                  
+        Rectangle2D r2 = new Rectangle2D.Float(x, y, 100, 70);
+        g2.setColor(Color.ORANGE);
+        aT.shear(a+0.05, b);
+        g2.transform(aT);
+        g2.fill(r2);
+        x=x+150;        
+        y=y-50;
+        }
+        
     }
-    catch (IOException e)
-    {
-        //Control de excepción si no se encuentra el archivo
-    }
-    g.drawImage(img, posx, posy, null);
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,20 +89,20 @@ public class Image extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InclinarFigura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InclinarFigura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InclinarFigura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InclinarFigura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Image().setVisible(true);
+                new InclinarFigura().setVisible(true);
             }
         });
     }

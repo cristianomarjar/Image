@@ -6,41 +6,40 @@
 
 package practica_1;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.geom.Arc2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
  * @author CristianOmarJar
  */
-public class Image extends javax.swing.JFrame {
+public class Arco2D extends javax.swing.JFrame {
 
     /**
-     * Creates new form Image
+     * Creates new form Arco2D
      */
-    public Image() {
+    public Arco2D() {
         initComponents();
     }
-
-    public void paint(Graphics g)
-{
-    super.paint(g);
-
-    BufferedImage img = null;
-    int posx=0, posy=0;
-    try
-    {
-        img = ImageIO.read(new File("src/recursos/logo_tec.jpg"));
-    }
-    catch (IOException e)
-    {
-        //Control de excepción si no se encuentra el archivo
-    }
-    g.drawImage(img, posx, posy, null);
+    public void paint (Graphics g) {
+super.paint(g);
+Graphics2D g2 = (Graphics2D)g;
+// Dibujo del rectángulo de referencia
+g2.setColor(Color.blue);
+g2.setStroke(new BasicStroke(1.0f));
+Rectangle2D r = new Rectangle2D.Float(100.0f, 75.0f, 50.0f, 100.0f);
+g2.draw(r);
+// Dibujo del arco
+g2.setColor(Color.red);
+g2.setStroke(new BasicStroke(3.0f));
+Arc2D a =new Arc2D.Float(100.0f, 75.0f, 50.0f, 100.0f, 0.0f, 135.0f, Arc2D.CHORD);
+g2.draw(a);
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,20 +83,20 @@ public class Image extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Arco2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Arco2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Arco2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Arco2D.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Image().setVisible(true);
+                new Arco2D().setVisible(true);
             }
         });
     }

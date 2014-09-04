@@ -10,13 +10,15 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.TexturePaint;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -32,6 +34,7 @@ public class Figuras extends javax.swing.JFrame {
     }
     
     
+    @Override
     public void paint(Graphics g){
         //Elipse       
         super.paint(g);
@@ -82,7 +85,7 @@ public class Figuras extends javax.swing.JFrame {
       g1.draw(l2);
       
       //Rectangulo
-      BufferedImage Bufimage = new BufferedImage( 10, 10,BufferedImage.TYPE_INT_RGB);
+        BufferedImage Bufimage = new BufferedImage( 10, 10,BufferedImage.TYPE_INT_RGB);
       Graphics2D ibuf = Bufimage.createGraphics();
       ibuf.setColor(Color.ORANGE);
       Rectangle2D rec = new Rectangle2D.Float(0,0,5,5);
@@ -94,6 +97,23 @@ public class Figuras extends javax.swing.JFrame {
        g1.setPaint(tpaint);                             
        Rectangle2D rect =new Rectangle2D.Float (10,170,120,150) ;
        g1.fill(rect);
+       
+       //textura img
+        Rectangle2D rectan = new Rectangle2D.Float(0,0,50,50);
+        Rectangle2D rectan1 = new Rectangle2D.Float(150,175,190,190);
+        File imag = new File(("src/recursos/logo_tec.jpg"));
+       BufferedImage image = null;
+
+        try {
+           image = ImageIO.read(imag);
+        }
+        catch (IOException e){
+            System.out.println("Error al Cargar...");
+    }
+        
+       TexturePaint tp1 = new TexturePaint(image, rectan);
+       g1.setPaint(tp1);
+       g1.fill(rectan1);
     } 
 
     

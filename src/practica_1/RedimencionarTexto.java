@@ -7,40 +7,34 @@
 package practica_1;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  *
  * @author CristianOmarJar
  */
-public class Image extends javax.swing.JFrame {
+public class RedimencionarTexto extends javax.swing.JFrame {
 
     /**
-     * Creates new form Image
+     * Creates new form RedimencionarTexto
      */
-    public Image() {
+    public RedimencionarTexto() {
         initComponents();
     }
-
-    public void paint(Graphics g)
-{
+        @Override
+    public void paint(Graphics g){
     super.paint(g);
-
-    BufferedImage img = null;
-    int posx=0, posy=0;
-    try
-    {
-        img = ImageIO.read(new File("src/recursos/logo_tec.jpg"));
-    }
-    catch (IOException e)
-    {
-        //Control de excepción si no se encuentra el archivo
-    }
-    g.drawImage(img, posx, posy, null);
-}
+        Graphics2D g2 = (Graphics2D)g;
+        AffineTransform at = g2.getTransform();
+        at.translate(10, 170);
+        g2.transform(at);
+        at.setToScale(2.5f, 2.5f);
+        for (int i = 0; i < 3 ; i++) {
+            g2.drawString("Cualquier frase",0.0f,0.0f);
+            g2.transform(at);            
+        }
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,20 +78,20 @@ public class Image extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RedimencionarTexto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RedimencionarTexto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RedimencionarTexto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Image.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RedimencionarTexto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Image().setVisible(true);
+                new RedimencionarTexto().setVisible(true);
             }
         });
     }
